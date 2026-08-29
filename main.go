@@ -79,7 +79,7 @@ func main() {
 
 	c := cors.New(cors.Options{
 
-		AllowedOrigins:   []string{"https://vercel.app"},
+		AllowedOrigins:   []string{"https://go-playground-weld.vercel.app"},
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowedHeaders:   []string{"Content-Type", "Authorization"},
 		AllowCredentials: true,
