@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/rs/cors"
 )
@@ -77,7 +78,8 @@ func main() {
 	})
 
 	c := cors.New(cors.Options{
-		AllowedOrigins:   []string{"https://go-playground-weld.vercel.app/"},
+
+		AllowedOrigins:   []string{"https://vercel.app"},
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowedHeaders:   []string{"Content-Type", "Authorization"},
 		AllowCredentials: true,
@@ -85,9 +87,14 @@ func main() {
 
 	handler := c.Handler(mux)
 
-	fmt.Println("Server is running on Port 8080")
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
 
-	if err := http.ListenAndServe(":8080", handler); err != nil {
+	fmt.Printf("Server is running on Port %s\n", port)
+
+	if err := http.ListenAndServe(":"+port, handler); err != nil {
 		panic(err)
 	}
 }
