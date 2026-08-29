@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/aws/aws-lambda-go/lambda"
+	"github.com/awslabs/aws-lambda-go-api-proxy/httpadapter"
 	"github.com/rs/cors"
 )
 
@@ -85,9 +87,7 @@ func main() {
 
 	handler := c.Handler(mux)
 
-	fmt.Println("Server is running on Port 8080")
-
-	if err := http.ListenAndServe(":8080", handler); err != nil {
-		panic(err)
-	}
+	// Instead of blocking on ListenAndServe, route requests through the AWS Lambda adapter
+	fmt.Println("Serverless API wrapper initialized successfully")
+	lambda.Start(httpadapter.NewV2(handler).ProxyWithContext)
 }
