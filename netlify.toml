@@ -1,0 +1,6 @@
+[build]
+  command = "go build -o netlify/functions/api main.go"
+  publish = "public"
+
+[functions]
+  directory = "netlify/functions"
