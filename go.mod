@@ -2,4 +2,8 @@ module example.com/m/v2
 
 go 1.26.1
 
-require github.com/rs/cors v1.11.1 // indirect
+require (
+	github.com/aws/aws-lambda-go v1.55.0 // indirect
+	github.com/awslabs/aws-lambda-go-api-proxy v0.16.2 // indirect
+	github.com/rs/cors v1.11.1 // indirect
+)
