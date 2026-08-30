@@ -56,7 +56,8 @@ func RateLimitMiddleware(bucket *TokenBucket, next http.Handler) http.Handler {
 		if !bucket.Allow() {
 			w.WriteHeader(http.StatusTooManyRequests)
 			json.NewEncoder(w).Encode(map[string]string{
-				"error": "Too many requests ! Retry after sometimes",
+				"message": "Retry after sometime",
+				"error":   "Too many requests !",
 			})
 			return
 		}
