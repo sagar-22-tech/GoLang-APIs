@@ -5,9 +5,62 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"sync"
+	"time"
 
 	"github.com/rs/cors"
 )
+
+type TokenBucket struct {
+	capacity       int
+	tokens         float64
+	refillRate     int
+	lastRefillTime time.Time
+	mu             sync.Mutex
+}
+
+func NewTokenBucket(capacity, refillRate int) *TokenBucket {
+	var tb TokenBucket
+	tb.capacity = capacity
+	tb.tokens = float64(capacity)
+	tb.refillRate = refillRate
+	tb.lastRefillTime = time.Now()
+
+	return &tb
+
+}
+
+func (tb *TokenBucket) Allow() bool {
+	tb.mu.Lock()
+	defer tb.mu.Unlock()
+	now := time.Now()
+	elapsedTime := now.Sub(tb.lastRefillTime)
+	tokensToAdd := elapsedTime.Seconds() * float64(tb.refillRate)
+	tb.lastRefillTime = now
+	tb.tokens += tokensToAdd
+
+	if tb.tokens > float64(tb.capacity) {
+		tb.tokens = float64(tb.capacity)
+	}
+
+	if tb.tokens >= 1 {
+		tb.tokens--
+		return true
+	}
+
+	return false
+}
+
+func RateLimitMiddleware(bucket *TokenBucket, next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if !bucket.Allow() {
+			w.WriteHeader(http.StatusTooManyRequests)
+			return
+		}
+
+		next.ServeHTTP(w, r)
+	})
+}
 
 func main() {
 	mux := http.NewServeMux()
@@ -85,7 +138,10 @@ func main() {
 		AllowCredentials: true,
 	})
 
-	handler := c.Handler(mux)
+	bucket := NewTokenBucket(5, 1)
+	rateLimitedMux := RateLimitMiddleware(bucket, mux)
+
+	handler := c.Handler(rateLimitedMux)
 
 	port := os.Getenv("PORT")
 	if port == "" {
