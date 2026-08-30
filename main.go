@@ -54,11 +54,13 @@ func (tb *TokenBucket) Allow() bool {
 func RateLimitMiddleware(bucket *TokenBucket, next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if !bucket.Allow() {
-			w.WriteHeader(http.StatusTooManyRequests)
-			json.NewEncoder(w).Encode(map[string]string{
+			response := map[string]string{
 				"message": "Retry after sometime",
-				"error":   "Too many requests !",
-			})
+				"error":   "Too may requests !",
+			}
+
+			w.WriteHeader(http.StatusTooManyRequests)
+			json.NewEncoder(w).Encode(response)
 			return
 		}
 
