@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"os"
 
-	"example.com/m/v2/apis/users/models"
+	"api/m/v2/apis/users/models"
 )
 
 func UserHandler(w http.ResponseWriter, r *http.Request) {
