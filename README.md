@@ -85,8 +85,8 @@ The `search` query parameter searches users by their first name.
 
 ```http
 GET /users?search=sagar
-GET /users?search=rahul
-GET /users?search=amit
+GET /users?search=vivaan
+GET /users?search=aditya
 ```
 
 The search is case-insensitive and also supports partial matches.
