@@ -106,6 +106,7 @@ func main() {
 
 		response := map[string]string{
 			"message": "Hello,World!",
+			"time":    time.Now().String(),
 			"method":  r.Method,
 		}
 
