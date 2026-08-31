@@ -97,12 +97,30 @@ The APIs return data in JSON format.
 
 ```json
 {
-  "id": 1,
-  "name": {
-    "firstname": "Sagar",
-    "lastname": "Saini"
+    "id": 1,
+    "name": {
+      "firstname": "Sagar",
+      "lastname": "Saini"
+    },
+    "username": "sagar_saini",
+    "email": "sagar.saini@example.com",
+    "address": {
+      "street": "MG Road",
+      "city": "Delhi",
+      "zipcode": "110001",
+      "geo": {
+        "lat": "28.6139",
+        "lng": "77.2090"
+      }
+    },
+    "phone": "+91-9876543201",
+    "website": "aaravsharma.dev",
+    "company": {
+      "name": "TechNova Solutions",
+      "post": "Software Engineer",
+      "salary": "75000"
+    }
   }
-}
 ```
 
 ### Testing the APIs
@@ -112,4 +130,5 @@ You can test these endpoints using:
 * Browser
 * Postman
 * cURL
-* **Go Playground** — the project's frontend API explorer
+* **[Go Playground](https://go-playground-weld.vercel.app/)** — an interactive API explorer for testing the project's endpoints.
+
