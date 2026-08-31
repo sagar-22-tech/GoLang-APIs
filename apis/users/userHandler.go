@@ -2,41 +2,73 @@ package users
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"os"
 	"strconv"
+	"strings"
 
 	"api/m/v2/apis/users/models"
 )
 
 func UserHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-type", "application/json")
+	w.Header().Set("Content-Type", "application/json")
+
 	if r.Method != http.MethodGet {
-		w.Header().Set("Content-type", "application/json")
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		json.NewEncoder(w).Encode(map[string]string{
 			"error": "Method not allowed",
 		})
 		return
 	}
-	fileBytes, err := os.ReadFile("apis/users/db.json")
+
+	search := strings.TrimSpace(strings.ToLower(r.URL.Query().Get("search")))
+
+	file, err := os.Open("apis/users/db.json")
 	if err != nil {
-		fmt.Printf("Error reading file: %v\n", err)
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode(map[string]string{
+			"error": "Database file missing or unavailable",
+		})
 		return
 	}
+	defer file.Close()
+
 	var users []models.User
-	err = json.Unmarshal(fileBytes, &users)
-	if err != nil {
-		fmt.Printf("Error parsing JSON: %v\n", err)
+
+	if err := json.NewDecoder(file).Decode(&users); err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode(map[string]string{
+			"error": "Malformed database structure",
+		})
+		return
+	}
+
+	if search == "" {
+		w.WriteHeader(http.StatusOK)
+		json.NewEncoder(w).Encode(users)
+		return
+	}
+
+	var matchedUsers []models.User
+
+	for _, user := range users {
+		if strings.Contains(strings.ToLower(user.Name.Firstname), search) {
+			matchedUsers = append(matchedUsers, user)
+		}
+	}
+
+	if len(matchedUsers) == 0 {
+		w.WriteHeader(http.StatusNotFound)
+		json.NewEncoder(w).Encode(map[string]string{
+			"error": "User not found",
+		})
 		return
 	}
 
 	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(users)
-
+	json.NewEncoder(w).Encode(matchedUsers)
 }
-func UserHandler2(w http.ResponseWriter, r *http.Request) {
+func UserHandlerID(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-type", "application/json")
 	if r.Method != http.MethodGet {
 		w.Header().Set("Content-type", "application/json")

@@ -21,8 +21,9 @@ func main() {
 
 	//Users api endpoint
 	mux.HandleFunc("/users", users.UserHandler)
-	mux.HandleFunc("/users/{id}", users.UserHandler2)
+	mux.HandleFunc("/users/{id}", users.UserHandlerID)
 
+	//Greet api endpoint
 	mux.HandleFunc("/greet", greet.GreetHandlerWithTime)
 
 	c := cors.New(cors.Options{
