@@ -2,11 +2,11 @@
   {
     "id": 1,
     "name": {
-      "firstname": "Aarav",
-      "lastname": "Sharma"
+      "firstname": "Sagar",
+      "lastname": "Saini"
     },
-    "username": "aarav_sharma",
-    "email": "aarav.sharma@example.com",
+    "username": "sagar_saini",
+    "email": "sagar.saini@example.com",
     "address": {
       "street": "MG Road",
       "city": "Delhi",
