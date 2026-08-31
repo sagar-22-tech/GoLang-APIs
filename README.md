@@ -24,7 +24,7 @@ GET /greet
 **Example**
 
 ```http
-GET https://golang-apis-dox2.onrender.com/greet
+ https://golang-apis-dox2.onrender.com/greet
 ```
 
 ---
@@ -40,7 +40,7 @@ GET /users
 **Example**
 
 ```http
-GET https://golang-apis-dox2.onrender.com/users
+https://golang-apis-dox2.onrender.com/users
 ```
 
 Returns mock data containing all users.
@@ -58,7 +58,7 @@ GET /users/:id
 **Example**
 
 ```http
-GET https://golang-apis-dox2.onrender.com/users/1
+https://golang-apis-dox2.onrender.com/users/1
 ```
 
 Replace `:id` with the ID of the user you want to retrieve.
@@ -76,7 +76,7 @@ GET /users?search=:search
 **Example**
 
 ```http
-GET https://golang-apis-dox2.onrender.com/users?search=sagar
+ https://golang-apis-dox2.onrender.com/users?search=sagar
 ```
 
 The `search` query parameter searches users by their first name.
