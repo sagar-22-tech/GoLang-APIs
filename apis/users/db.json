@@ -1,0 +1,253 @@
+[
+  {
+    "id": 1,
+    "name": {
+      "firstname": "Aarav",
+      "lastname": "Sharma"
+    },
+    "username": "aarav_sharma",
+    "email": "aarav.sharma@example.com",
+    "address": {
+      "street": "MG Road",
+      "city": "Delhi",
+      "zipcode": "110001",
+      "geo": {
+        "lat": "28.6139",
+        "lng": "77.2090"
+      }
+    },
+    "phone": "+91-9876543201",
+    "website": "aaravsharma.dev",
+    "company": {
+      "name": "TechNova Solutions",
+      "post": "Software Engineer",
+      "salary": "75000"
+    }
+  },
+  {
+    "id": 2,
+    "name": {
+      "firstname": "Vivaan",
+      "lastname": "Verma"
+    },
+    "username": "vivaan_verma",
+    "email": "vivaan.verma@example.com",
+    "address": {
+      "street": "Sector 18",
+      "city": "Noida",
+      "zipcode": "201301",
+      "geo": {
+        "lat": "28.5706",
+        "lng": "77.3219"
+      }
+    },
+    "phone": "+91-9876543202",
+    "website": "vivaanverma.dev",
+    "company": {
+      "name": "CloudMatrix",
+      "post": "Backend Developer",
+      "salary": "82000"
+    }
+  },
+  {
+    "id": 3,
+    "name": {
+      "firstname": "Aditya",
+      "lastname": "Gupta"
+    },
+    "username": "aditya_gupta",
+    "email": "aditya.gupta@example.com",
+    "address": {
+      "street": "Civil Lines",
+      "city": "Meerut",
+      "zipcode": "250001",
+      "geo": {
+        "lat": "28.9845",
+        "lng": "77.7064"
+      }
+    },
+    "phone": "+91-9876543203",
+    "website": "adityagupta.dev",
+    "company": {
+      "name": "CodeCraft Labs",
+      "post": "Full Stack Developer",
+      "salary": "78000"
+    }
+  },
+  {
+    "id": 4,
+    "name": {
+      "firstname": "Arjun",
+      "lastname": "Singh"
+    },
+    "username": "arjun_singh",
+    "email": "arjun.singh@example.com",
+    "address": {
+      "street": "Park Street",
+      "city": "Kolkata",
+      "zipcode": "700016",
+      "geo": {
+        "lat": "22.5726",
+        "lng": "88.3639"
+      }
+    },
+    "phone": "+91-9876543204",
+    "website": "arjunsingh.dev",
+    "company": {
+      "name": "ByteWorks",
+      "post": "DevOps Engineer",
+      "salary": "88000"
+    }
+  },
+  {
+    "id": 5,
+    "name": {
+      "firstname": "Ishaan",
+      "lastname": "Malhotra"
+    },
+    "username": "ishaan_malhotra",
+    "email": "ishaan.malhotra@example.com",
+    "address": {
+      "street": "Koramangala",
+      "city": "Bangalore",
+      "zipcode": "560034",
+      "geo": {
+        "lat": "12.9352",
+        "lng": "77.6245"
+      }
+    },
+    "phone": "+91-9876543205",
+    "website": "ishaanmalhotra.dev",
+    "company": {
+      "name": "InnovateTech",
+      "post": "Cloud Engineer",
+      "salary": "95000"
+    }
+  },
+  {
+    "id": 6,
+    "name": {
+      "firstname": "Rohan",
+      "lastname": "Mehta"
+    },
+    "username": "rohan_mehta",
+    "email": "rohan.mehta@example.com",
+    "address": {
+      "street": "Andheri West",
+      "city": "Mumbai",
+      "zipcode": "400058",
+      "geo": {
+        "lat": "19.1364",
+        "lng": "72.8296"
+      }
+    },
+    "phone": "+91-9876543206",
+    "website": "rohanmehta.dev",
+    "company": {
+      "name": "FinEdge",
+      "post": "Java Developer",
+      "salary": "85000"
+    }
+  },
+  {
+    "id": 7,
+    "name": {
+      "firstname": "Kabir",
+      "lastname": "Joshi"
+    },
+    "username": "kabir_joshi",
+    "email": "kabir.joshi@example.com",
+    "address": {
+      "street": "C Scheme",
+      "city": "Jaipur",
+      "zipcode": "302001",
+      "geo": {
+        "lat": "26.9124",
+        "lng": "75.7873"
+      }
+    },
+    "phone": "+91-9876543207",
+    "website": "kabirjoshi.dev",
+    "company": {
+      "name": "DataSphere",
+      "post": "Data Analyst",
+      "salary": "70000"
+    }
+  },
+  {
+    "id": 8,
+    "name": {
+      "firstname": "Vihaan",
+      "lastname": "Kapoor"
+    },
+    "username": "vihaan_kapoor",
+    "email": "vihaan.kapoor@example.com",
+    "address": {
+      "street": "Viman Nagar",
+      "city": "Pune",
+      "zipcode": "411014",
+      "geo": {
+        "lat": "18.5679",
+        "lng": "73.9143"
+      }
+    },
+    "phone": "+91-9876543208",
+    "website": "vihaankapoor.dev",
+    "company": {
+      "name": "AppForge",
+      "post": "Mobile Developer",
+      "salary": "76000"
+    }
+  },
+  {
+    "id": 9,
+    "name": {
+      "firstname": "Reyansh",
+      "lastname": "Chauhan"
+    },
+    "username": "reyansh_chauhan",
+    "email": "reyansh.chauhan@example.com",
+    "address": {
+      "street": "Gomti Nagar",
+      "city": "Lucknow",
+      "zipcode": "226010",
+      "geo": {
+        "lat": "26.8467",
+        "lng": "80.9462"
+      }
+    },
+    "phone": "+91-9876543209",
+    "website": "reyanshchauhan.dev",
+    "company": {
+      "name": "SoftPeak",
+      "post": "Frontend Developer",
+      "salary": "72000"
+    }
+  },
+  {
+    "id": 10,
+    "name": {
+      "firstname": "Atharv",
+      "lastname": "Mishra"
+    },
+    "username": "atharv_mishra",
+    "email": "atharv.mishra@example.com",
+    "address": {
+      "street": "Boring Road",
+      "city": "Patna",
+      "zipcode": "800001",
+      "geo": {
+        "lat": "25.5941",
+        "lng": "85.1376"
+      }
+    },
+    "phone": "+91-9876543210",
+    "website": "atharvmishra.dev",
+    "company": {
+      "name": "Nexa Systems",
+      "post": "System Engineer",
+      "salary": "68000"
+    }
+  }
+  
+]

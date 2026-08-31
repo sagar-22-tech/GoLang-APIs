@@ -8,6 +8,9 @@ import (
 	"sync"
 	"time"
 
+	"example.com/m/v2/apis/greet"
+	"example.com/m/v2/apis/health"
+	"example.com/m/v2/apis/users"
 	"github.com/rs/cors"
 )
 
@@ -72,54 +75,10 @@ func RateLimitMiddleware(bucket *TokenBucket, next http.Handler) http.Handler {
 func main() {
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
+	mux.HandleFunc("/health", health.HealthHandler)
+	mux.HandleFunc("/user", users.UserHandler)
 
-		if r.Method != http.MethodGet {
-			w.WriteHeader(http.StatusMethodNotAllowed)
-			json.NewEncoder(w).Encode(map[string]string{
-				"error": "Method Not Allowed",
-			})
-			return
-		}
-
-		w.WriteHeader(http.StatusOK)
-
-		json.NewEncoder(w).Encode(map[string]string{
-			"status":  "ok",
-			"message": "Go API is operational",
-		})
-	})
-
-	mux.HandleFunc("/greet", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
-
-		if r.Method != http.MethodGet {
-			w.WriteHeader(http.StatusMethodNotAllowed)
-
-			json.NewEncoder(w).Encode(map[string]string{
-				"error": "Method Not Allowed",
-			})
-
-			return
-		}
-		loc, err := time.LoadLocation("Asia/Kolkata")
-		if err != nil {
-			fmt.Println("Error loading location:", err)
-			return
-		}
-
-		currentTimeIST := time.Now().In(loc)
-
-		response := map[string]string{
-			"message": "Hello,World!",
-			"time":    currentTimeIST.String(),
-			"method":  r.Method,
-		}
-
-		w.WriteHeader(http.StatusOK)
-		json.NewEncoder(w).Encode(response)
-	})
+	mux.HandleFunc("/greet", greet.GreetHandlerWithTime)
 
 	c := cors.New(cors.Options{
 
