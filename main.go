@@ -103,10 +103,17 @@ func main() {
 
 			return
 		}
+		loc, err := time.LoadLocation("Asia/Kolkata")
+		if err != nil {
+			fmt.Println("Error loading location:", err)
+			return
+		}
+
+		currentTimeIST := time.Now().In(loc)
 
 		response := map[string]string{
 			"message": "Hello,World!",
-			"time":    time.Now().String(),
+			"time":    currentTimeIST.String(),
 			"method":  r.Method,
 		}
 
