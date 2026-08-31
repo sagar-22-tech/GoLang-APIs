@@ -94,7 +94,7 @@ func main() {
 	mux.HandleFunc("/api/v1/greet", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 
-		if r.Method != http.MethodPost {
+		if r.Method != http.MethodGet {
 			w.WriteHeader(http.StatusMethodNotAllowed)
 
 			json.NewEncoder(w).Encode(map[string]string{
@@ -104,32 +104,8 @@ func main() {
 			return
 		}
 
-		var requestData map[string]any
-
-		err := json.NewDecoder(r.Body).Decode(&requestData)
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-
-			json.NewEncoder(w).Encode(map[string]string{
-				"error": "Invalid JSON body",
-			})
-
-			return
-		}
-
-		name, ok := requestData["name"].(string)
-		if !ok {
-			w.WriteHeader(http.StatusBadRequest)
-
-			json.NewEncoder(w).Encode(map[string]string{
-				"error": "name must be a string",
-			})
-
-			return
-		}
-
 		response := map[string]string{
-			"message": "Hello, " + name + "!",
+			"message": "Hello,World!",
 			"method":  r.Method,
 		}
 
