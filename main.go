@@ -16,8 +16,12 @@ import (
 func main() {
 	mux := http.NewServeMux()
 
+	//Health api endpoint
 	mux.HandleFunc("/health", health.HealthHandler)
-	mux.HandleFunc("/user", users.UserHandler)
+
+	//Users api endpoint
+	mux.HandleFunc("/users", users.UserHandler)
+	mux.HandleFunc("/users/{id}", users.UserHandler2)
 
 	mux.HandleFunc("/greet", greet.GreetHandlerWithTime)
 
