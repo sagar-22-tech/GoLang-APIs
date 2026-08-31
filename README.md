@@ -1,19 +1,115 @@
-GoLang APIs is a backend-focused Go project that serves as a collection of production-oriented REST APIs built to demonstrate practical backend development concepts in Go. The project brings together multiple APIs and backend features in a single codebase, making it a showcase of my understanding of building, securing, optimizing, and deploying modern backend services.
+## API Endpoints
 
-The project focuses on writing clean and maintainable Go code while implementing concepts such as RESTful API design, middleware, authentication, rate limiting, caching, CORS, error handling, concurrency, and database integration.
+Base URL:
 
-The goal of GoLang APIs is not just to build individual APIs, but to provide a public portfolio of my backend engineering skills and Go knowledge, allowing anyone to explore and test the APIs.
+`https://golang-apis-dox2.onrender.com`
 
-Key Features
-🚀 RESTful APIs built with Go
-🔐 Authentication & authorization
-⚡ API rate limiting
-🗄️ Database integration
-🚀 Caching for improved performance
-🌐 CORS configuration
-🛡️ Middleware-based request processing
-❌ Centralized error handling
-🔄 Concurrent processing using Go's concurrency primitives
-📦 Modular and maintainable project structure
-📝 API documentation
-🌍 Publicly accessible APIs for testing and demonstration
+### Available APIs
+
+| API            | Method | Endpoint                | Description                                 |
+| -------------- | ------ | ----------------------- | ------------------------------------------- |
+| Hello API      | `GET`  | `/greet`                | Returns a greeting with the current time.   |
+| User API       | `GET`  | `/users`                | Returns mock data of all users.             |
+| User API by ID | `GET`  | `/users/:id`            | Returns mock user data using the user's ID. |
+| Search Users   | `GET`  | `/users?search=:search` | Searches users by their first name.         |
+
+### 1. Hello API
+
+**Endpoint**
+
+```http
+GET /greet
+```
+
+**Example**
+
+```http
+GET https://golang-apis-dox2.onrender.com/greet
+```
+
+---
+
+### 2. Get All Users
+
+**Endpoint**
+
+```http
+GET /users
+```
+
+**Example**
+
+```http
+GET https://golang-apis-dox2.onrender.com/users
+```
+
+Returns mock data containing all users.
+
+---
+
+### 3. Get User by ID
+
+**Endpoint**
+
+```http
+GET /users/:id
+```
+
+**Example**
+
+```http
+GET https://golang-apis-dox2.onrender.com/users/1
+```
+
+Replace `:id` with the ID of the user you want to retrieve.
+
+---
+
+### 4. Search Users
+
+**Endpoint**
+
+```http
+GET /users?search=:search
+```
+
+**Example**
+
+```http
+GET https://golang-apis-dox2.onrender.com/users?search=sagar
+```
+
+The `search` query parameter searches users by their first name.
+
+**Example requests:**
+
+```http
+GET /users?search=sagar
+GET /users?search=rahul
+GET /users?search=amit
+```
+
+The search is case-insensitive and also supports partial matches.
+
+### Response
+
+The APIs return data in JSON format.
+
+```json
+{
+  "id": 1,
+  "name": {
+    "firstname": "Sagar",
+    "lastname": "Saini"
+  }
+}
+```
+
+### Testing the APIs
+
+You can test these endpoints using:
+
+* Browser
+* Postman
+* cURL
+* **Go Playground** — the project's frontend API explorer
