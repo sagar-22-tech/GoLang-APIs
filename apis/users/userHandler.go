@@ -55,7 +55,7 @@ func UserHandler2(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Invalid ID format: must be an integer", http.StatusBadRequest)
 		return
 	}
-	targetID = targetID % 10
+	targetID = ((targetID - 1) % 10) + 1
 
 	file, err := os.OpenFile("apis/users/db.json", os.O_RDONLY, 0)
 	if err != nil {
