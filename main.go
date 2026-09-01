@@ -33,9 +33,7 @@ func main() {
 		AllowedHeaders:   []string{"Content-Type", "Authorization"},
 		AllowCredentials: true,
 	})
-
-	bucket := middleware.NewTokenBucket(5, 1)
-	rateLimitedMux := middleware.RateLimitMiddleware(bucket, mux)
+	rateLimitedMux := middleware.RateLimitMiddleware(mux)
 
 	handler := c.Handler(rateLimitedMux)
 
