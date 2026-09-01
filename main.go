@@ -34,8 +34,9 @@ func main() {
 		AllowCredentials: true,
 	})
 
-	bucket := middleware.NewTokenBucket(5, 1)
-	rateLimitedMux := middleware.RateLimitMiddleware(bucket, mux)
+	limiter := middleware.NewRateLimiter(5, 1)
+
+	rateLimitedMux := middleware.RateLimitMiddleware(limiter, mux)
 
 	handler := c.Handler(rateLimitedMux)
 
