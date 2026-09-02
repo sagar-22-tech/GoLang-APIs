@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"time"
 
 	"api/m/v2/apis/greet"
 	"api/m/v2/apis/health"
@@ -14,32 +15,48 @@ import (
 )
 
 func main() {
+
 	mux := http.NewServeMux()
 
-	//Health api endpoint
+	// Health API endpoint
 	mux.HandleFunc("/health", health.HealthHandler)
 
-	//Users api endpoint
+	// Users API endpoint
 	mux.HandleFunc("/users", users.UserHandler)
 	mux.HandleFunc("/users/{id}", users.UserHandlerID)
 
-	//Greet api endpoint
+	// Greet API endpoint
 	mux.HandleFunc("/greet", greet.GreetHandlerWithTime)
 
+	// CORS
 	c := cors.New(cors.Options{
-
 		AllowedOrigins:   []string{"https://go-playground-weld.vercel.app"},
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowedHeaders:   []string{"Content-Type", "Authorization"},
 		AllowCredentials: true,
 	})
 
-	bucket := middleware.NewTokenBucket(5, 1)
-	rateLimitedMux := middleware.RateLimitMiddleware(bucket, mux)
+	// Create Leaky Bucket
+	bucket := middleware.NewLeakyBucket(
+		5,             // capacity
+		1*time.Second, // leak rate
+		5*time.Second, // request expiry
+	)
 
-	handler := c.Handler(rateLimitedMux)
+	// Start background leak worker
+	go bucket.Leak()
+
+	// Rate limit middleware
+	rateLimitedHandler := middleware.RateLimitMiddleware(
+		bucket,
+		mux,
+	)
+
+	// CORS wraps rate limiter
+	handler := c.Handler(rateLimitedHandler)
 
 	port := os.Getenv("PORT")
+
 	if port == "" {
 		port = "8080"
 	}
