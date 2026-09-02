@@ -8,7 +8,6 @@ import (
 	"api/m/v2/apis/greet"
 	"api/m/v2/apis/health"
 	"api/m/v2/apis/users"
-	"api/m/v2/middleware"
 
 	"github.com/rs/cors"
 )
@@ -34,10 +33,7 @@ func main() {
 		AllowCredentials: true,
 	})
 
-	bucket := middleware.NewTokenBucket(5, 1)
-	rateLimitedMux := middleware.RateLimitMiddleware(bucket, mux)
-
-	handler := c.Handler(rateLimitedMux)
+	handler := c.Handler(mux)
 
 	port := os.Getenv("PORT")
 	if port == "" {
