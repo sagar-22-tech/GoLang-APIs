@@ -7,7 +7,6 @@ import (
 	"os"
 	"strconv"
 	"strings"
-	"time"
 
 	"api/m/v2/apis/users/models"
 
@@ -141,7 +140,7 @@ func UserHandler(rdb *redis.Client) http.HandlerFunc {
 			r.Context(),
 			cacheKey,
 			data,
-			20*time.Second,
+			0,
 		).Err()
 
 		if err != nil {
@@ -284,7 +283,7 @@ func UserHandlerID(rdb *redis.Client) http.HandlerFunc {
 			r.Context(),
 			cacheKey,
 			data,
-			20*time.Second,
+			0,
 		).Err()
 
 		if err != nil {
