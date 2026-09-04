@@ -17,6 +17,7 @@ import (
 func main() {
 
 	mux := http.NewServeMux()
+	rdb := NewRedisClient()
 
 	// Health API endpoint
 	mux.HandleFunc("/health", health.HealthHandler)
