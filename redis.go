@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/joho/godotenv"
@@ -8,9 +9,10 @@ import (
 )
 
 func NewRedisClient() *redis.Client {
+
 	err := godotenv.Load()
 	if err != nil {
-		panic(err)
+		fmt.Println(".env file not found, using system environment variables")
 	}
 
 	return redis.NewClient(&redis.Options{
