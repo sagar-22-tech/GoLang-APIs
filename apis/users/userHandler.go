@@ -284,7 +284,7 @@ func UserHandlerID(rdb *redis.Client) http.HandlerFunc {
 			r.Context(),
 			cacheKey,
 			data,
-			0,
+			20*time.Second,
 		).Err()
 
 		if err != nil {
