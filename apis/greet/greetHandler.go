@@ -19,6 +19,7 @@ func GreetHandlerWithTime(w http.ResponseWriter, r *http.Request) {
 
 		return
 	}
+
 	loc, err := time.LoadLocation("Asia/Kolkata")
 	if err != nil {
 		fmt.Println("Error loading location:", err)

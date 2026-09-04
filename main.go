@@ -19,8 +19,8 @@ func main() {
 	mux.HandleFunc("/health", health.HealthHandler)
 
 	//Users api endpoint
-	mux.HandleFunc("/users", users.UserHandler)
-	mux.HandleFunc("/users/{id}", users.UserHandlerID)
+	mux.HandleFunc("/users", users.UserHandler(rdb))
+	mux.HandleFunc("/users/{id}", users.UserHandlerID(rdb))
 
 	//Greet api endpoint
 	mux.HandleFunc("/greet", greet.GreetHandlerWithTime)
